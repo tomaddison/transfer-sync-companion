@@ -1,0 +1,23 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad/
+xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Real build configs (contain Supabase project URLs + publishable keys).
+# Templates live in Configs/*.example.xcconfig - copy and fill in locally.
+Configs/Debug.xcconfig
+Configs/Staging.xcconfig
+Configs/Release.xcconfig
+
+# macOS
+.DS_Store
+
+# Claude Code local settings / context
+.claude/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
