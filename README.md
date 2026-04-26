@@ -4,7 +4,7 @@ A macOS menu bar app that auto-uploads files from local folders to a cloud servi
 
 The remote hierarchy is fetched from a Supabase-authenticated REST API. Files are uploaded directly to S3 using short-lived presigned URLs minted by the backend.
 
-<img width="1400" height="735" alt="hero" src="https://github.com/user-attachments/assets/af48f765-f5d6-4311-bee4-cfb43cb87a6d" />
+<img width="1400" height="735" alt="hero" src="https://github.com/user-attachments/assets/8d607dc3-6f38-43b5-9baa-2fd6645ea0db" />
 
 ## Features
 
