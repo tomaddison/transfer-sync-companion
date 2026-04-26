@@ -1,8 +1,10 @@
 # TransferSync Companion
 
-A macOS menu bar app that auto-uploads files from local folders to a cloud service. You pick a destination in the service's workspace/project/folder hierarchy, point a local folder at it, and any file dropped into that folder is uploaded to that destination automatically.
+A macOS menu bar app that auto-uploads files from local folders to a cloud service. Each watched folder is mapped to a destination in the service's workspace/project/folder hierarchy; any file dropped into that folder is uploaded to that destination automatically.
 
 The remote hierarchy is fetched from a Supabase-authenticated REST API. Files are uploaded directly to S3 using short-lived presigned URLs minted by the backend.
+
+<img width="1400" height="735" alt="hero" src="https://github.com/user-attachments/assets/af48f765-f5d6-4311-bee4-cfb43cb87a6d" />
 
 ## Features
 
@@ -30,13 +32,13 @@ Swift, SwiftUI, AppKit (`NSPanel`, `NSStatusBar`), Supabase Swift SDK, Keychain,
 
 ## Run locally
 
-You'll need a backend that:
+A backend is required that:
 1. Authenticates users via Supabase.
 2. Exposes REST endpoints to list the user's workspaces, the projects in a workspace, and the folders in a project.
 3. Exposes an endpoint that returns a presigned S3 upload URL (single or multipart) for a given filename and destination.
 4. Exposes a `complete-upload` endpoint to mark uploads done.
 
-To run against your own backend:
+To run against a local backend:
 
 1. Clone the repo.
 2. Copy the xcconfig templates. The real ones are gitignored:
@@ -45,8 +47,8 @@ To run against your own backend:
    cp Configs/Staging.example.xcconfig Configs/Staging.xcconfig
    cp Configs/Release.example.xcconfig Configs/Release.xcconfig
    ```
-3. Fill in `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `API_BASE_URL`, and `WEB_BASE_URL` in `Debug.xcconfig` to point at your own stack.
-4. Add `transfersync://auth/callback` to your Supabase project's allowed redirect URLs (Auth, URL Configuration).
+3. Fill in `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `API_BASE_URL`, and `WEB_BASE_URL` in `Debug.xcconfig` to point at the local stack.
+4. Add `transfersync://auth/callback` to the Supabase project's allowed redirect URLs (Auth, URL Configuration).
 5. Open `TransferSyncCompanion.xcodeproj` in Xcode and run the **Debug** scheme.
 
 To build against staging or prod, edit the scheme (Product, Scheme, Edit Scheme, Run, Build Configuration) and pick **Staging** or **Release**, with matching values filled into the respective xcconfig file.
@@ -71,4 +73,4 @@ Docs/                          ARCHITECTURE.md
 
 ## Notes
 
-Real keys and project URLs live in gitignored `Configs/*.xcconfig` files. See `Configs/*.example.xcconfig` for the expected shape. The app refuses to launch if any required value is missing or still set to the `REPLACE_ME` placeholder.
+Real keys and project URLs live in gitignored `Configs/*.xcconfig` files. See `Configs/*.example.xcconfig` for the expected shape. The app will launch once the `REPLACE_ME` placeholders are replaced with the required values.
